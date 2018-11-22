@@ -12,8 +12,9 @@ public class Main {
 		
 		FuzzyToolBox toolbox = new FuzzyToolBox();
 		
-		toolbox.readFile("C:\\Users\\Soha Samad\\Desktop\\College\\Year 4\\Soft_Computing\\Tasks\\Assignment3-FuzzyLogic\\Lec-Sample.txt");
+		toolbox.readFile("Lec-Sample.txt");
 		toolbox.show();
+		toolbox.fuzzification();
 		
 }
 
