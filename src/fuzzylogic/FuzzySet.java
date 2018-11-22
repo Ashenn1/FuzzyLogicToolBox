@@ -11,7 +11,11 @@ public class FuzzySet {
 	public String setName; // Ex: Temperature , Cover
 	public int crispValue;
 	List<LinguisticElement>elements = new ArrayList<>(setCount); //each element contains --> (name(freezing) ,type(trapezoidal), range(0,0,30,50))
+	public float membershipValue;
 	
+	
+
+
 	public FuzzySet(int setCount, String setName, int crispValue, List<LinguisticElement> elements) {
 		super();
 		this.setCount = setCount;
@@ -30,6 +34,14 @@ public class FuzzySet {
 		
 	}
 
+	public float getMembershipValue() {
+		return membershipValue;
+	}
+
+
+	public void setMembershipValue(float membershipValue) {
+		this.membershipValue = membershipValue;
+	}
 
 	public int getSetCount() {
 		return setCount;
