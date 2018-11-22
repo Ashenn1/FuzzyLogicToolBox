@@ -7,9 +7,10 @@ public class LinguisticElement {
 
 	
 
-	public String name; // Ex : (Freezing , warm , cool).
-	public String type; // Ex : (Triangular , Trapezoidal)
-	public List<Integer>Range = new ArrayList<>(); // Ex: (30 50 70) 3 or 4 points depending on it being triangular or trapezoidal.
+	private String name; // Ex : (Freezing , warm , cool).
+	private String type; // Ex : (triangle , trapezoidal)
+	private List<Integer>Range = new ArrayList<>(); // Ex: (30 50 70) 3 or 4 points depending on it being triangular or trapezoidal.
+	private float membershipValue = -1; //after fuzzification, this is the membership ship value of the crisp value 
 	
 	public LinguisticElement(String name, String type, List<Integer> range) {
 		super();
@@ -21,6 +22,15 @@ public class LinguisticElement {
 	
 	public LinguisticElement() {
 		
+	}
+
+	public float getMembershipValue() {
+		return membershipValue;
+	}
+
+
+	public void setMembershipValue(float membershipValue) {
+		this.membershipValue = membershipValue;
 	}
 
 
