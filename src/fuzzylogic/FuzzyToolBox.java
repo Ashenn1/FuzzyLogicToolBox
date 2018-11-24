@@ -16,7 +16,8 @@ public class FuzzyToolBox {
 	public int setNum; //number of sets in the fuzzy toolbox.
 	public List<FuzzySet>fuzzySet = new ArrayList<>(setNum);
 	public FuzzySet outputSet = new FuzzySet(); //fuzzy set of the output.
-	public String[] inferenceRules;
+	public int numOfRules=0;
+	public List<InferenceRule> inferenceRules;
 	
 
 	
@@ -44,13 +45,7 @@ public class FuzzyToolBox {
 		this.outputSet = outputSet;
 	}
 
-	public String[] getInferenceRule() {
-		return inferenceRules;
-	}
-
-	public void setInferenceRule(String[] inferenceRule) {
-		this.inferenceRules = inferenceRule;
-	}
+	
 
 	void readFile(String filepath) {
 		FileReader filereader;
@@ -142,27 +137,38 @@ public class FuzzyToolBox {
 			}
 			outputSet.setElements(lingArray);
 
-			int numOfRules=0;
+			
 			String[] z;
 			numOfRules = Integer.parseInt(in.readLine());
+			inferenceRules=new ArrayList<InferenceRule>(numOfRules); //intializing array of inference rules.
+			
 			for(int i=0;i<numOfRules;i++) {
-				List<InferenceRule> rule=new ArrayList<InferenceRule>(numOfRules);
+				
+				InferenceRule element = new InferenceRule(); //creating inference rule element.
+				
 				 z = in.readLine().split("\\s+");
-				 rule.get(i).numOfPremise = Integer.parseInt(z[0]);
+				 
+				element.numOfPremise = Integer.parseInt(z[0]);
+				
 				 for(int r=1;r<z.length-1;r++) { // loop to pass on premises.
 					 if(z[r].equals("AND")) {
-						  rule.get(i).type.add("AND");
+						 
+						 element.type.add("AND");
 					 }
 					else if(z[r].equals("OR")) {
-						rule.get(i).type.add("OR");
+						
+						element.type.add("OR");
 					}
 						  
 					else { // then it's a premise
-						rule.get(i).Premise.add(z[r]);
+						
+						element.Premise.add(z[r]);
 					}
 					 
 					 }
-						 
+				 element.output=z[z.length-1];
+			
+				  inferenceRules.add(element); //adding the inference rule element to the array of the rules.
 				 }
 			
 			lingArray.clear();
@@ -261,7 +267,10 @@ public class FuzzyToolBox {
 			    System.out.println(outputSet.getElements().get(j).getRange());	
 			}
 			
-			
+			for(int i=0;i<numOfRules;i++) {
+				System.out.println(inferenceRules.get(i).numOfPremise + " "+ inferenceRules.get(i).output);
+				
+			}
 		
 	}
 	
