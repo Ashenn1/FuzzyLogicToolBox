@@ -15,7 +15,7 @@ public class FuzzyToolBox {
 
 	public int setNum; //number of sets in the fuzzy toolbox.
 	public List<FuzzySet>fuzzySet = new ArrayList<>(setNum);
-	public FuzzySet outputSet = new FuzzySet(); //fuzzy set of the output.
+	public FuzzySet outputSet = new FuzzySet(); //fuzzy set of the output , membershipvalue in the linguistic element contains the inference output.
 	public int numOfRules=0;
 	public List<InferenceRule> inferenceRules;
 	
@@ -76,9 +76,11 @@ public class FuzzyToolBox {
 					y=in.readLine().split("\\s+");
 					ling.setName(y[0]); 
 					ling.setType(y[1]);
+					
 					if(ling.getType().equals("trapezoidal")) { //get ready for 4 points right there.
 						y=in.readLine().split("\\s+");
 						List<Integer>range = new ArrayList(4);
+						
 						for(int p=0;p<4;p++)
 							range.add(Integer.parseInt(y[p]));
 						
@@ -89,6 +91,7 @@ public class FuzzyToolBox {
 						
 						y=in.readLine().split("\\s+");
 						List<Integer>range = new ArrayList(3);
+						
 						for(int p=0;p<3;p++)
 							range.add(Integer.parseInt(y[p]));
 						
@@ -109,24 +112,29 @@ public class FuzzyToolBox {
 			for(int i=0;i<outputSet.getSetCount();i++) {
 				
 				LinguisticElement ling = new LinguisticElement();
+				
 				y=in.readLine().split("\\s+");
 				ling.setName(y[0]); 
 				ling.setType(y[1]);
+				
 				if(ling.getType().equals("trapezoidal")) 
 				{ //get ready for 4 points right there.
 					y=in.readLine().split("\\s+");
 					List<Integer>range = new ArrayList(4);
+					
 					for(int p=0;p<4;p++)
 						range.add(Integer.parseInt(y[p]));
 					
 					ling.setRange(range);
 					lingArray.add(ling);
 				}
+				
 				else if(ling.getType().equals("triangle")) { 
 					// 3 points it is then.
 					
 					y=in.readLine().split("\\s+");
 					List<Integer>range = new ArrayList(3);
+					
 					for(int p=0;p<3;p++)
 						range.add(Integer.parseInt(y[p]));
 					
@@ -193,6 +201,7 @@ public class FuzzyToolBox {
 				element.setType(fuzzySet.get(i).elements.get(j).getType());
 				element.setRange(fuzzySet.get(i).elements.get(j).getRange());
 				element.setMembershipValue(fuzzySet.get(i).elements.get(j).getMembershipValue());
+				
 				if(element.getType().equals("triangle")) {
 					float a = element.getRange().get(0);
 					float b = element.getRange().get(1);
@@ -236,15 +245,82 @@ public class FuzzyToolBox {
 						element.setMembershipValue(0);
 					}			
 				}
-				System.out.println(element.getName());
-				System.out.println(element.getMembershipValue());
+				fuzzySet.get(i).elements.get(j).setMembershipValue(element.getMembershipValue());
+				
+				System.out.println(element.getName() + "     " + element.getMembershipValue());
+				
 			}
 		}
 		
 	}
 	
 	
-	
+	void InferenceBASIC() { //only 2 premises
+		
+		for(int i=0 ; i <inferenceRules.size();i++) {
+			
+			  
+		      String outputLingElem = inferenceRules.get(i).output.split("=")[1]; //Ex: returns "fast".
+		      
+	          
+			 for(int j=0;j<inferenceRules.get(i).type.size();j++) { //type loop , type index 0 -- > take premises 0 & 1
+				 
+				 
+		         String lingElem1 = inferenceRules.get(i).Premise.get(j).split("=")[1]; // "warm"
+		         String lingElem2 = inferenceRules.get(i).Premise.get(j+1).split("=")[1]; // "sunny"
+		         float x =0 , y = 0; //carries the membership values
+				 
+		         
+				 if(inferenceRules.get(i).type.get(j).equals("AND")) {
+					 
+				          for( int t =0 ; t<fuzzySet.size();t++) {
+				        	  for(int l=0 ;l < fuzzySet.get(t).elements.size();l++) {
+				        		  
+				        		    if(fuzzySet.get(t).getElements().get(l).getName().equals(lingElem1))
+				        		    	x =  fuzzySet.get(t).getElements().get(l).getMembershipValue();
+				        		    
+				        		    else if(fuzzySet.get(t).getElements().get(l).getName().equals(lingElem2))
+				        		    	y= fuzzySet.get(t).getElements().get(l).getMembershipValue();
+				        	  }
+				        	  
+				        	  
+				          }
+				          
+				          for(int s=0 ;s<outputSet.getElements().size();s++)
+				        	  if(outputSet.getElements().get(s).getName().equals(outputLingElem))
+				        		  outputSet.getElements().get(s).setMembershipValue(Math.min(x,y));
+					}
+				 
+				 else if (inferenceRules.get(i).type.get(j).equals("OR")) {
+					 
+					 
+					 for( int t =0 ; t<fuzzySet.size();t++) {
+			        	  for(int l=0 ;l < fuzzySet.get(t).elements.size();l++) {
+			        		  
+			        		    if(fuzzySet.get(t).getElements().get(l).getName().equals(lingElem1))
+			        		    	x =  fuzzySet.get(t).getElements().get(l).getMembershipValue();
+			        		    
+			        		    else if(fuzzySet.get(t).getElements().get(l).getName().equals(lingElem2))
+			        		    	y= fuzzySet.get(t).getElements().get(l).getMembershipValue();
+			        	  }
+			        	  
+			        	  
+			          }
+			          for(int s=0 ;s<outputSet.getElements().size();s++)
+			        	  if(outputSet.getElements().get(s).getName().equals(outputLingElem))
+			        		  outputSet.getElements().get(s).setMembershipValue(Math.max(x,y));
+					 
+					 
+					 
+				 }
+			 }
+			
+		}
+		
+		System.out.println("After Inference : ");
+		for(int s=0 ;s<outputSet.getElements().size();s++)
+		    System.out.println(outputSet.getElements().get(s).getName() + " " + outputSet.getElements().get(s).getMembershipValue());
+	}
 	
 	
 	

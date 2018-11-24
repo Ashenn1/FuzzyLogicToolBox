@@ -15,6 +15,7 @@ public class Main {
 		toolbox.readFile("Lec-Sample.txt");
 		toolbox.show();
 		toolbox.fuzzification();
+	    toolbox.InferenceBASIC();
 		
 }
 
