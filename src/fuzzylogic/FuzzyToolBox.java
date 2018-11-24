@@ -18,6 +18,7 @@ public class FuzzyToolBox {
 	public FuzzySet outputSet = new FuzzySet(); //fuzzy set of the output , membershipvalue in the linguistic element contains the inference output.
 	public int numOfRules=0;
 	public List<InferenceRule> inferenceRules;
+	public float result = 0;
 	
 
 	
@@ -194,6 +195,9 @@ public class FuzzyToolBox {
 	}
 	
 	void fuzzification() {
+		
+		System.out.println("Fuzzification Step : ");
+	
 		LinguisticElement element = new LinguisticElement();
 		for(int i = 0; i < setNum; i++) {
 			for(int j = 0; j < fuzzySet.get(i).elements.size(); j++) {
@@ -247,11 +251,12 @@ public class FuzzyToolBox {
 				}
 				fuzzySet.get(i).elements.get(j).setMembershipValue(element.getMembershipValue());
 				
+				
 				System.out.println(element.getName() + "     " + element.getMembershipValue());
 				
 			}
 		}
-		
+		System.out.println();
 	}
 	
 	
@@ -317,9 +322,66 @@ public class FuzzyToolBox {
 			
 		}
 		
-		System.out.println("After Inference : ");
+		System.out.println("Inference Step : ");
 		for(int s=0 ;s<outputSet.getElements().size();s++)
 		    System.out.println(outputSet.getElements().get(s).getName() + " " + outputSet.getElements().get(s).getMembershipValue());
+		System.out.println();
+	}
+	
+	
+	
+	
+	void defuzzification() {
+		
+		float denominator = 0;
+		
+		for(int i=0;i<outputSet.setCount;i++) { //setting the centroid of the output fuzzy set.
+			
+			if(outputSet.elements.get(i).getType().equals("triangle")) {
+				outputSet.centroid = outputSet.elements.get(i).getRangeByIndex(1);
+				result+= (outputSet.centroid*outputSet.elements.get(i).getMembershipValue());
+				denominator += outputSet.elements.get(i).getMembershipValue();
+			}
+			
+			else if (outputSet.elements.get(i).getType().equals("trapezoidal")){
+				
+				if(i==0) { //trapezoidal in the beginning
+	
+					outputSet.centroid = outputSet.elements.get(i).getRangeByIndex(2);
+					
+					result+= (outputSet.centroid*outputSet.elements.get(i).getMembershipValue());
+					denominator += outputSet.elements.get(i).getMembershipValue();
+					
+				}
+				else if (i == (outputSet.setCount-1)) //trapezoidal in the end
+				{
+					outputSet.centroid = outputSet.elements.get(i).getRangeByIndex(1);
+					
+					result+= (outputSet.centroid*outputSet.elements.get(i).getMembershipValue());
+					denominator += outputSet.elements.get(i).getMembershipValue();
+				}
+				else { // somewhere in the middle
+					float point1 = outputSet.elements.get(i).getRangeByIndex(1);
+					float point2 = outputSet.elements.get(i).getRangeByIndex(2);
+					outputSet.centroid = (float) ((point1 + point2)/2.0);
+					
+					result+= (outputSet.centroid*outputSet.elements.get(i).getMembershipValue());
+					denominator += outputSet.elements.get(i).getMembershipValue();
+					
+				}
+				
+				
+			}
+			
+			
+		}
+		
+		//weighted mean
+		result /= denominator;
+		
+		System.out.println("Defuzzification Step : " + result);
+		System.out.println();
+		
 	}
 	
 	

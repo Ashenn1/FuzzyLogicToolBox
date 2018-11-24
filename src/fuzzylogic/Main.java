@@ -13,10 +13,10 @@ public class Main {
 		FuzzyToolBox toolbox = new FuzzyToolBox();
 		
 		toolbox.readFile("Lec-Sample.txt");
-		toolbox.show();
 		toolbox.fuzzification();
 	    toolbox.InferenceBASIC();
-		
+		toolbox.defuzzification();
+		//toolbox.show();
 }
 
 }

@@ -46,6 +46,11 @@ public class LinguisticElement {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public int getRangeByIndex(int i) {
+		return Range.get(i);
+	}
+	
 	public List<Integer> getRange() {
 		return Range;
 	}
