@@ -28,7 +28,7 @@ Y trapezoidal
 Z triangle
 7 8 9
 4
-2 var1=Left AND var2=A outputVar=X
+2 var1=Left AND var2=A var1=Left outputVar=X
 2 var2=B OR var3=A outputVar=Y
 2 var1=Right AND var2=C outputVar=Z
 2 var3=B AND var2=B outputVar=X
