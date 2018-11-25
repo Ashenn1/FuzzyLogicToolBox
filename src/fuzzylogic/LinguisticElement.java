@@ -9,10 +9,10 @@ public class LinguisticElement {
 
 	private String name; // Ex : (Freezing , warm , cool).
 	private String type; // Ex : (triangle , trapezoidal)
-	private List<Integer>Range = new ArrayList<>(); // Ex: (30 50 70) 3 or 4 points depending on it being triangular or trapezoidal.
+	private List<Float>Range = new ArrayList<>(); // Ex: (30 50 70) 3 or 4 points depending on it being triangular or trapezoidal.
 	private float membershipValue = -1; //after fuzzification, this is the membership ship value of the crisp value 
 	
-	public LinguisticElement(String name, String type, List<Integer> range) {
+	public LinguisticElement(String name, String type, List<Float> range) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -47,15 +47,15 @@ public class LinguisticElement {
 		this.type = type;
 	}
 	
-	public int getRangeByIndex(int i) {
+	public float getRangeByIndex(int i) {
 		return Range.get(i);
 	}
 	
-	public List<Integer> getRange() {
+	public List<Float> getRange() {
 		return Range;
 	}
 	
-	public void setRange(List<Integer> range) {
+	public void setRange(List<Float> range) {
 		for(int i=0;i<range.size();i++) {
 			Range.add(i, range.get(i));
 		}

@@ -9,7 +9,7 @@ public class FuzzySet {
 	
 	public int setCount; //number of linguistic variables in the fuzzy set.
 	public String setName; // Ex: Temperature , Cover
-	public int crispValue;
+	public float crispValue;
 	public List<LinguisticElement>elements = new ArrayList<>(setCount); //each element contains --> (name(freezing) ,type(trapezoidal), range(0,0,30,50))
 	public float centroid;
 	
@@ -47,11 +47,11 @@ public class FuzzySet {
 	public void setSetName(String setName) {
 		this.setName = setName;
 	}
-	public int getCrispValue() {
+	public float getCrispValue() {
 		return crispValue;
 	}
-	public void setCrispValue(int crispValue) {
-		this.crispValue = crispValue;
+	public void setCrispValue(float f) {
+		this.crispValue = f;
 	}
 	public List<LinguisticElement> getElements() {
 		return elements;

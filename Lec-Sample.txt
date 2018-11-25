@@ -24,5 +24,5 @@ slow trapezoidal
 fast trapezoidal
 25 75 100 100
 2
-2 temp=warm AND cover=sunny speed=fast
-2 temp=cool AND cover=cloudy speed=slow 
+2 temp=warm AND cover=sunny OR cover=overcast speed=fast
+2 temp=cool AND cover=partly speed=slow 
