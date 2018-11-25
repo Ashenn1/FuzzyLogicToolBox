@@ -56,7 +56,7 @@ public class LinguisticElement {
 	}
 	
 	public void setRange(List<Float> range) {
-		for(int i=0;i<range.size();i++) {
+		for(int i = 0; i < range.size(); i++) {
 			Range.add(i, range.get(i));
 		}
 		

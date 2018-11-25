@@ -7,14 +7,11 @@ public class FuzzySet {
 
 	
 	
-	public int setCount; //number of linguistic variables in the fuzzy set.
-	public String setName; // Ex: Temperature , Cover
-	public float crispValue;
-	public List<LinguisticElement>elements = new ArrayList<>(setCount); //each element contains --> (name(freezing) ,type(trapezoidal), range(0,0,30,50))
-	public float centroid;
-	
-	
-
+	private int setCount; //number of linguistic variables in the fuzzy set.
+	private String setName; // Ex: Temperature , Cover
+	private float crispValue;
+	private List<LinguisticElement>elements = new ArrayList<>(setCount); //each element contains --> (name(freezing) ,type(trapezoidal), range(0,0,30,50))
+	private float centroid;
 
 	public FuzzySet(int setCount, String setName, int crispValue, List<LinguisticElement> elements) {
 		super();
@@ -22,13 +19,11 @@ public class FuzzySet {
 		this.setName = setName;
 		this.crispValue = crispValue;
 		
-		for(int i=0;i<elements.size();i++) {
+		for(int i = 0; i < elements.size(); i++) {
 			this.elements.add(i,elements.get(i));
 		}
 		elements.clear();
-		
 	}
-	
 	
 	public FuzzySet() {
 		
@@ -57,13 +52,19 @@ public class FuzzySet {
 		return elements;
 	}
 	public void setElements(List<LinguisticElement> elements) {
-		for(int i=0;i<elements.size();i++) {
+		for(int i = 0; i < elements.size(); i++) {
 			this.elements.add(i,elements.get(i));
 			
 		}
 		elements.clear();
 	}
 	
-	
-	
+	public float getCentroid() {
+		return centroid;
+	}
+
+
+	public void setCentroid(float centroid) {
+		this.centroid = centroid;
+	}
 }
