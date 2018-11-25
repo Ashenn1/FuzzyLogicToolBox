@@ -433,7 +433,7 @@ public class FuzzyToolBox {
 		
 		System.out.println();
 		
-		System.out.println("Hardcode Inference : ");
+		System.out.println("Hardcore Inference : ");
 		
 		for(int i=0;i<outputSet.getElements().size();i++) {
 			
