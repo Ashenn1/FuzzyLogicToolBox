@@ -175,7 +175,7 @@ public class FuzzyToolBox {
 	}
 	
 	void fuzzification() {
-		System.out.println("Fuzzification Step : ");
+		//System.out.println("Fuzzification Step : ");
 	
 		LinguisticElement element = new LinguisticElement();
 		for(int i = 0; i < setNum; i++) {
@@ -231,11 +231,11 @@ public class FuzzyToolBox {
 				fuzzySet.get(i).getElements().get(j).setMembershipValue(element.getMembershipValue());
 				table.put(element.getName(), element.getMembershipValue());
 				
-				System.out.println(element.getName() + "     " + element.getMembershipValue());
+				//System.out.println(element.getName() + "     " + element.getMembershipValue());
 				
 			}
 		}
-		System.out.println();
+		//System.out.println();
 	}
 	
 	void InferenceBASIC() { //only 2 premises
@@ -291,14 +291,11 @@ public class FuzzyToolBox {
 			
 		}
 		
-		System.out.println("Basic Inference Step : ");
-		for(int s = 0; s < outputSet.getElements().size(); s++)
-		    System.out.println(outputSet.getElements().get(s).getName() + " " + outputSet.getElements().get(s).getMembershipValue());
-		System.out.println();
+		
 	}
 	
 	void Inference() {
-		System.out.println("Hardcore Infrenece:");
+		//System.out.println("Hardcore Infrenece:");
 		for(int i = 0; i < inferenceRules.size(); i++) {
 			List <Float> values = new ArrayList<>();
 			List <String> operators = new ArrayList<>();
@@ -315,6 +312,8 @@ public class FuzzyToolBox {
         			//System.out.println(table.get(outputLingElem));
         		}
         	}
+			
+			
         	for(int j = 0; j < inferenceRules.get(i).getType().size(); j++) {
         		operators.add(inferenceRules.get(i).getType().get(j));
         	}
@@ -328,6 +327,7 @@ public class FuzzyToolBox {
         			j = 0;
         		}
         	}
+        	
         	//System.out.println("After: "  + values);
         	for(int j = 0; j < operators.size(); j++) {
         		if(operators.get(j).equals("OR")) {
@@ -346,9 +346,10 @@ public class FuzzyToolBox {
         	for(int s = 0; s < outputSet.getElements().size(); s++) {
         		if(outputSet.getElements().get(s).getName().equals(outputLingElem)) {
         			outputSet.getElements().get(s).setMembershipValue(values.get(0));
-        			System.out.println(outputSet.getElements().get(s).getName() + " " + outputSet.getElements().get(s).getMembershipValue());
+        			//System.out.println(outputSet.getElements().get(s).getName() + " " + outputSet.getElements().get(s).getMembershipValue());
         		}
         	}
+        	
         		 
         }
 		
@@ -356,7 +357,7 @@ public class FuzzyToolBox {
 //		System.out.println("HardCore Inference: ");
 //		for(int s = 0; s < table.size(); s++)
 //			
-		System.out.println();
+		//System.out.println();
 	}
 	
 	void defuzzification() {
@@ -407,8 +408,8 @@ public class FuzzyToolBox {
 		//weighted mean
 		result /= denominator;
 		
-		System.out.println("Defuzzification Step : " + result);
-		System.out.println();
+		//System.out.println("Defuzzification Step : " + result);
+		//System.out.println();
 		
 	}
 	
@@ -416,31 +417,33 @@ public class FuzzyToolBox {
 	
 	void show() {
 		
-		System.out.println("Number of fuzzy sets in this toolbox " + setNum );
-		System.out.println("The fuzzy set: " );
-		for(int i=0;i<setNum;i++) {
-			System.out.println("fuzzy set " + i +" "+"Name: "+ fuzzySet.get(i).getSetName());
-			System.out.println("fuzzy set " + i +" "+"crisp value "+ fuzzySet.get(i).getCrispValue());
-			for(int j=0;j<fuzzySet.get(i).getElements().size();j++)
-			System.out.println("fuzzy set " + i +" "+"elements Name: "+ fuzzySet.get(i).getElements().get(j).getName());
+		
+		System.out.println("Fuzzification Step : ");
+		
+		for(int i=0;i<fuzzySet.size();i++) {
+			for(int j=0;j<fuzzySet.get(i).getElements().size();j++) {
+				System.out.println(fuzzySet.get(i).getElements().get(j).getName() + "     " + fuzzySet.get(i).getElements().get(j).getMembershipValue());
+			}
 		}
 		
+		System.out.println();
 		
-		System.out.println(outputSet.getSetName());
+		System.out.println("Hardcore Inference : ");
+		
+		for(int i=0;i<outputSet.getElements().size();i++) {
 			
-			for(int j=0;j<outputSet.getElements().size();j++) {
-				System.out.println("elements Name: "+ outputSet.getElements().get(j).getName());
-			    System.out.println(outputSet.getElements().get(j).getRange());	
-			}
-			
-			for(int i=0;i<numOfRules;i++) {
-				System.out.println(inferenceRules.get(i).getNumOfPremise() + " "+ inferenceRules.get(i).getOutput());
-				
-			}
+			System.out.println(outputSet.getElements().get(i).getName() + "     " + outputSet.getElements().get(i).getMembershipValue());
+		}
+		
+		System.out.println();
+		
+		System.out.println("Defuzzification Step : ");
+		System.out.println(result);
 		
 	}
 	
 	
+		
 	
 	
 }

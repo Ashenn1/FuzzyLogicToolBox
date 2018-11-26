@@ -7,12 +7,11 @@ public class Main {
 		
 		FuzzyToolBox toolbox = new FuzzyToolBox();
 		
-		toolbox.readFile("Lec-Sample.txt");
+		toolbox.readFile("Assignment3-Sample.txt");
 		toolbox.fuzzification();
-	    //toolbox.InferenceBASIC();
 	    toolbox.Inference();
 		toolbox.defuzzification();
-		//toolbox.show();
+		toolbox.show();
 }
 
 }
