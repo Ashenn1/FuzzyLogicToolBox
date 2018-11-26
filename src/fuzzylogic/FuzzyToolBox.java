@@ -19,9 +19,7 @@ public class FuzzyToolBox {
 	private List<InferenceRule> inferenceRules;
 	private float result = 0;
 	private Map<String, Float> table = new HashMap<>();		//to map between linguistic element name and its membership value
-	
-	
-	
+		
 	public int getSetNum() {
 		return setNum;
 	}
@@ -299,9 +297,6 @@ public class FuzzyToolBox {
 		System.out.println();
 	}
 	
-	
-	
-	
 	void Inference() {
 		System.out.println("Hardcore Infrenece:");
 		for(int i = 0; i < inferenceRules.size(); i++) {
@@ -368,11 +363,11 @@ public class FuzzyToolBox {
 		
 		float denominator = 0;
 		
-		for(int i=0;i<outputSet.getSetCount();i++) { //setting the centroid of the output fuzzy set.
+		for(int i = 0; i < outputSet.getSetCount(); i++) { //setting the centroid of the output fuzzy set.
 			
 			if(outputSet.getElements().get(i).getType().equals("triangle")) {
 				outputSet.setCentroid(outputSet.getElements().get(i).getRangeByIndex(1));
-				result+= (outputSet.getCentroid() * outputSet.getElements().get(i).getMembershipValue());
+				result += (outputSet.getCentroid() * outputSet.getElements().get(i).getMembershipValue());
 				denominator += outputSet.getElements().get(i).getMembershipValue();
 			}
 			

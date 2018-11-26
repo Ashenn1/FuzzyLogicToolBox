@@ -19,7 +19,6 @@ public class LinguisticElement {
 		Range = range;
 	}
 	
-	
 	public LinguisticElement() {
 		
 	}
@@ -28,21 +27,22 @@ public class LinguisticElement {
 		return membershipValue;
 	}
 
-
 	public void setMembershipValue(float membershipValue) {
 		this.membershipValue = membershipValue;
 	}
 
-
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getType() {
 		return type;
 	}
+	
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -61,11 +61,5 @@ public class LinguisticElement {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 }

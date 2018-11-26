@@ -47,6 +47,4 @@ public class InferenceRule {
 		this.output = output;
 	}
 	
-	
-	
 }
